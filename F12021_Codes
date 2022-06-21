@@ -1,0 +1,35 @@
+CREATE table if not exists drivers(DriverID INT NOT NULL PRIMARY KEY, FirstName VARCHAR(15), LastName VARCHAR(15));
+
+CREATE table if not exists teams(TeamID INT NOT NULL AUTO_INCREMENT PRIMARY KEY, TeamName VARCHAR(30), TeamDrivers INT, FOREIGN KEY(TeamDrivers) REFERENCES drivers(DriverID) ON DELETE CASCADE ON UPDATE CASCADE);
+
+CREATE table if not exists tracks(TrackID INT AUTO_INCREMENT NOT NULL PRIMARY KEY, Location VARCHAR(30));
+
+CREATE table if not exists races(
+RaceID VARCHAR (10), RaceTrack INT, Driver INT, Team INT, QualifyingPosition INT, RacePosition INT, RacePoints INT, 
+PRIMARY KEY(RaceID, RaceTrack, Driver, Team), FOREIGN KEY(RaceTrack) REFERENCES tracks(TrackID) ON DELETE CASCADE ON UPDATE CASCADE, FOREIGN KEY(Driver) REFERENCES drivers(DriverID) ON DELETE CASCADE ON UPDATE CASCADE, FOREIGN KEY(Team) REFERENCES teams(TeamID) ON DELETE CASCADE ON UPDATE CASCADE);
+
+
+INSERT INTO drivers VALUES ("44", "Lewis", "Hamilton"), ("5", "Sergio", "Perez"), ("33", "Max", "Verstappen"), ("77", "Valtteri", "Bottas");
+
+INSERT INTO teams(TeamName,TeamDrivers)  VALUES ("Mercedes", "44"), ("Mercedes", "77"), ("RED BULL", "5"), ("RED BULL", "33"); 
+
+
+INSERT INTO tracks(Location) VALUES("Bahrain"), ("Italy"), ("Portugal"), ("Spain"), ("Monaco"), ("Azerbaijan"), ("France"), ("Styria"), ("Austria"), ("Great Britain"), ("Hungary"), ("Belgium"), ("Netherlands"), ("Italy"), ("Russia"), ("Turkey"), ("United States"), ("Mexico"), ("Brazil"), ("Qatar"), ("Saudi Arabia"), ("Abu Dhabi");
+
+								
+			    Round    Track  "Driver" "Team"  "Quali" "Race" "Points		
+			    					
+INSERT INTO races VALUES ("Round01", "1", "44", "1", "2", "1", "25")
+("Round01", "1", "77", "2", "3", "3", "16"), 
+("Round01", "1", "33", "3", "1", "2", "18"), ("Round01", "1", "5", "4", "11", "5", "10");
+
+
+
+Querys
+
+SELECT RaceID, TrackId.Location, DriverId.
+
+
+select teams.TeamName, drivers.DriverID, drivers.FirstName, drivers.LastName from teams
+INNER JOIN drivers
+ON teams.TeamDrivers = drivers.DriverID 
